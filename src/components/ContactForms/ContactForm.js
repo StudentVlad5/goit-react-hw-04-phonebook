@@ -1,6 +1,6 @@
 import {useState} from "react";
-import propTypes from 'prop-types';
 import { nanoid } from 'nanoid';
+import propTypes from 'prop-types';
 
 function  ContactForm  ({onAdd, onCheckUnique}) {
     const [initial_state, setInitial_state] = useState({
@@ -16,7 +16,6 @@ function handleChangeForm  (event) {
 function handleFormSubmit  (event)  {
     event.preventDefault()
     const id = nanoid();
-    // const {onAdd} = props;
     const isValidateForm = validateForm();
     if(isValidateForm){
     let newContact = onAdd({id:id,name: initial_state.name, phone: initial_state.phone});
@@ -25,7 +24,6 @@ function handleFormSubmit  (event)  {
 }
 
 function validateForm () {
-        // const { onCheckUnique } = this.props;
     if (!initial_state.name || !initial_state.phone){
         alert('Some field is empty')
         return false}
@@ -39,8 +37,6 @@ function resetForm () {
         phone: '',
     }))
 }
-
-
 
         return(
         <form onSubmit={handleFormSubmit}>
@@ -65,16 +61,11 @@ function resetForm () {
                 required/>
             </label>
             <button type='submit'>Add contact</button>
-        </form>)
-        
+        </form>)  
     }
-
-
-
 export default ContactForm
 
 ContactForm.propTypes = {
-    state: propTypes.arrayOf(
-        propTypes.string
-    )
+    onAdd: propTypes.func,
+    onCheckUnique: propTypes.func,
 }
